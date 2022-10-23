@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016-2020 Alexander Ong
+// Copyright (c) 2016-2020 Alexander Ong
 // See LICENSE in project root for license information.
 
 #define TIMING_DEBUG
@@ -148,7 +148,9 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     readonly string[] ValidFileExtentions = new string[] { "chart", "mid", "msce" };
 
     // Use this for initialization
-    void Awake () {
+    protected override void Awake () {
+        base.Awake();
+
         windowHandleManager = new WindowHandleManager(string.Format("{0} v{1} {2}", Application.productName, Application.version, Globals.applicationBranchName), GetComponent<Settings>().productName);
         Application.logMessageReceived += HandleException;
 
@@ -781,7 +783,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
                 }
                 catch (Exception e)
                 {
-                    // TODO
+                    errorManager.QueueErrorMessage(Logger.LogException(e, "Failed to open song.ini file"));
                 }
             }),
 
