@@ -71,7 +71,27 @@ namespace MoonscraperEngine.Audio
 
             // Load bass opus plugin for encoding
             {
-                int handle = Bass.BASS_PluginLoad("bassopus.dll");
+                // Ugly but works; doesn't load in the editor otherwise
+                string bassOpusPath = Path.Combine(UnityEngine.Application.dataPath, "Plugins",
+#if UNITY_EDITOR // In the editor the dataPath property will return the path to the repo's Assets folder
+                    "Bass Audio",
+    #if UNITY_EDITOR_WIN
+                    "Windows",
+    #elif UNITY_EDITOR_LINUX
+                    "Linux",
+    #endif
+
+    #if UNITY_EDITOR_64
+                    "x64",
+    #else
+                    "x86",
+    #endif
+#endif
+                    "bassopus"
+                );
+                UnityEngine.Debug.Log(bassOpusPath);
+
+                int handle = Bass.BASS_PluginLoad(bassOpusPath);
                 if (handle != 0)
                 {
                     pluginHandles.Add(handle);
