@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020 Alexander Ong
+﻿// Copyright (c) 2016-2020 Alexander Ong
 // See LICENSE in project root for license information.
 
 #define TIMING_DEBUG
@@ -758,6 +758,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
                         errorManager.QueueErrorMessage(Logger.LogException(e, "Failed to open chart file"));
 
                     error = true;
+                    return;
                 }
 
                 try
