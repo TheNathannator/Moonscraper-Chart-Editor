@@ -57,7 +57,7 @@ v2f vert (float4 vertex : POSITION)
 
 #if _DEPTH_AWARE_ON
 	o.uv = ComputeScreenPos (o.pos);
-	o.ray = mul (UNITY_MATRIX_MV, vertex).xyz * float3(-1,-1,1);
+	o.ray = UnityObjectToViewPos(vertex) * float3(-1,-1,1);
 #endif
 	
 	return o;
